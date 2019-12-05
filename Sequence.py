@@ -15,11 +15,16 @@ __status__ = "Production"
 
 
 class Sequence:
+    dna_bases = IUPAC.IUPACUnambiguousDNA.letters
+    rna_bases = IUPAC.IUPACUnambiguousRNA.letters
+    amino_acids = IUPAC.IUPACProtein.letters
+
     def __init__(self, size: int = 100, seq_type: str = 'D', id: str = None, seq=None):
         """Creates random Sequence of given size and type.
 
         :param size: Size of sequence.
         :param seq_type: Sequence type, D = DNA, R = RNA, P = Protein.
+        :param id: ID of sequence.
         :param seq: Ready Sequence object.
         """
         self.s_type = {'D': 'DNA', 'R': 'RNA', 'P': 'PROTEIN'}[str(seq_type)]
@@ -33,8 +38,6 @@ class Sequence:
                                 + ''.join(random.choice(digits) for i in range(random.randint(4, 7)))
 
         self.record = SeqRecord.SeqRecord(self.seq, id=self.id)
-        self.dna_bases = IUPAC.IUPACUnambiguousDNA.letters
-        self.rna_bases = IUPAC.IUPACUnambiguousRNA.letters
 
     def show(self):
         print('Sequence: {}\nID: {}'.format(self.seq, self.id))
@@ -44,17 +47,15 @@ class Sequence:
 
         :return: Bio.Seq object.
         """
-        dna_bases, rna_bases = IUPAC.IUPACUnambiguousDNA.letters, IUPAC.IUPACUnambiguousRNA.letters
-        amino_acids = IUPAC.IUPACProtein.letters
         if self.s_type not in {'DNA', 'RNA', 'PROTEIN'}:
             raise ValueError('Wrong type of sequence')
         else:
             if self.s_type == 'DNA':
-                seq = Seq.Seq(''.join(random.choice(dna_bases) for i in range(self.size)))
+                seq = Seq.Seq(''.join(random.choice(Sequence.dna_bases) for i in range(self.size)))
             elif self.s_type == 'RNA':
-                seq = Seq.Seq(''.join(random.choice(rna_bases) for i in range(self.size)))
+                seq = Seq.Seq(''.join(random.choice(Sequence.rna_bases) for i in range(self.size)))
             else:
-                seq = Seq.Seq(''.join(random.choice(amino_acids) for i in range(self.size)))
+                seq = Seq.Seq(''.join(random.choice(Sequence.amino_acids) for i in range(self.size)))
         return seq
 
     def calculate_gc(self):
@@ -63,9 +64,7 @@ class Sequence:
         :return: Float number - GC percent.
         """
         if self.s_type == 'PROTEIN':
-            raise TypeError(
-                'GC are not in {} sequence'.format(self.s_type)
-            )
+            raise TypeError('GC are not in {} sequence'.format(self.s_type))
         return SeqUtils.GC(self.seq)
 
     def transcribe(self):
@@ -74,9 +73,7 @@ class Sequence:
         :return: Seq object of type RNA.
         """
         if self.s_type != 'DNA':
-            raise TypeError(
-                'Sequence type {} can not be transcribed.'.format(self.s_type)
-            )
+            raise TypeError('Sequence type {} can not be transcribed.'.format(self.s_type))
         return Seq.Seq.transcribe(self.seq)
 
     def translate(self):
@@ -85,9 +82,7 @@ class Sequence:
         :return: Seq object of type Protein.
         """
         if self.s_type != 'RNA':
-            raise TypeError(
-                'Sequence type {} can not be translated.'.format(self.s_type)
-            )
+            raise TypeError('Sequence type {} can not be translated.'.format(self.s_type))
         return Seq.Seq.translate(self.seq)
 
     def reversed_transcription(self):
@@ -96,9 +91,7 @@ class Sequence:
         :return: Seq object of type DNA.
         """
         if self.s_type != 'RNA':
-            raise TypeError(
-                'Sequence type {} can not be transcribed in reverse.'.format(self.s_type)
-            )
+            raise TypeError('Sequence type {} can not be transcribed in reverse.'.format(self.s_type))
         return Seq.back_transcribe(self.seq)
 
     def get_sequence_elems(self):
@@ -159,8 +152,6 @@ class Sequence:
         elif self.s_type == 'PROTEIN':
             income = NCBIWWW.qblast('blastp', 'pdb', self.record.format('fasta'))
         else:
-            raise TypeError(
-                'Type {} is not valid to use in blast'.format(self.s_type)
-            )
+            raise TypeError('Type {} is not valid to use in blast'.format(self.s_type))
         result = income.read()
         return result
