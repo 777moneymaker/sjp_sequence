@@ -13,6 +13,13 @@ sudo chmod +x play.py
 ./play.pl
 ```
 
+Requirements
+-----
+* Python3.7 or Python3.8 (if you can run pylab on 3.8)
+* Biopython
+* Numpy
+* Matplotlib/Pylab
+
 Author
 -----
 Milosz Chodkowski [777moneymaker](www.github.com/777moneymaker)
