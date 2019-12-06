@@ -1,12 +1,17 @@
-#!/usr/bin/python3.8
+#!/usr/bin/python3
 
+import Plot
 from Sequence import Sequence
+
+__author__ = 'Milosz Chodkowski'
+__license__ = "MIT"
+__version__ = "1.0"
+__status__ = "Production"
 
 
 def main():
-    sq = Sequence(seq_type='D')
-    sq.show()
-    sq.use_in_blast()
+    sq = Sequence(size=5000, seq_type='D')
+    Plot.plot_from_fasta('dr.fasta', 'dy.fasta', 9)
 
 
 if __name__ == '__main__':
