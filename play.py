@@ -11,7 +11,9 @@ __status__ = "Production"
 
 def main():
     sq = Sequence(size=5000, seq_type='D')
-    Plot.plot_from_fasta('dr.fasta', 'dy.fasta', 9)
+    sq.read_from_fasta('dr.fasta')
+    sq.blast_search()
+    # Plot.plot_from_fasta('dr.fasta', 'dy.fasta', 9)
 
 
 if __name__ == '__main__':

@@ -4,9 +4,9 @@ Plot module contains methods for dot-plotting sequences.
 """
 import sys
 
-import matplotlib.pylab as pylab
 from Bio import SeqIO
 from Bio.Blast import NCBIXML
+from matplotlib import pylab
 
 
 def plot_from_xml(fn1=None, fnx=None, window=7):

@@ -7,10 +7,10 @@ import os
 import random
 from string import ascii_uppercase, digits
 
-import matplotlib.pylab as pylab
 from Bio import Seq, SeqUtils, SeqIO, SeqRecord
 from Bio.Alphabet import IUPAC
 from Bio.Blast import NCBIWWW, NCBIXML
+from matplotlib import pylab
 
 __author__ = 'Milosz Chodkowski'
 __license__ = "MIT"
@@ -36,7 +36,7 @@ class Sequence:
         # If size is not multiple of 3, then make it bigger
         self.size = size if not size % 3 else size + (3 - size % 3)
         # If sequence is not none and if it's instance of Sequence class
-        self.seq = seq if seq and isinstance(seq, Sequence) else self.generate_sequence()
+        self.seq = seq if seq else self.generate_sequence()
 
         self.id = id if id else ''.join(random.choice(ascii_uppercase) for i in range(2)) + '_' \
                                 + ''.join(random.choice(digits) for i in range(random.randint(4, 7)))
@@ -200,7 +200,7 @@ class Sequence:
                 with open(fn, 'w') as of:
                     of.write(income.read())
                     of.close()
-            result = NCBIXML.read(income.read())
+            result = NCBIXML.read(income)
             align = result.alignment[0]
             print(align.title)
             print(align.lenght)
