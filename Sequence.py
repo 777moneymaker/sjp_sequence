@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Sequence is module that contains Sequence class.
 
 Holds information about BioPython-like sequences.
@@ -7,7 +7,7 @@ import os
 import random
 from string import ascii_uppercase, digits
 
-import pylab
+import matplotlib.pylab as pylab
 from Bio import Seq, SeqUtils, SeqIO, SeqRecord
 from Bio.Alphabet import IUPAC
 from Bio.Blast import NCBIWWW, NCBIXML

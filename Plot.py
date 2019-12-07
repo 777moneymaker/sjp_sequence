@@ -1,10 +1,10 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 Plot module contains methods for dot-plotting sequences.
 """
 import sys
 
-import pylab
+import matplotlib.pylab as pylab
 from Bio import SeqIO
 from Bio.Blast import NCBIXML
 
@@ -79,7 +79,7 @@ def plot_from_fasta(fn1=None, fn2=None, window=7):
             pylab.show()
 
 
-if __name__ == 'm__main__':
+if __name__ == '__main__':
     if sys.argv[4] == 'xml':
         plot_from_xml(sys.argv[1], sys.argv[2], sys.argv[3])
     elif sys.argv[4] == 'fasta':

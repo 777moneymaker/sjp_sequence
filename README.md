@@ -15,10 +15,10 @@ sudo chmod +x play.py
 
 Requirements
 -----
-* Python3.7 or Python3.8 (if you can run pylab on 3.8)
+* Python3.8
 * Biopython
 * Numpy
-* Matplotlib/Pylab
+* Matplotlib
 
 Author
 -----
