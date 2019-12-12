@@ -221,4 +221,4 @@ class Sequence:
                 pylab.title('Dot plot using window size {}\n(allowing no mis-matches)'.format(window))
                 pylab.show()
         else:
-            return None
+            raise ValueError("No sequence found!")
